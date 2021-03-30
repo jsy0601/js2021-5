@@ -1,4 +1,84 @@
 # 정서연 [202030428]
+## [03월 30일]
+### 오늘 배운 내용 요약
+- 중첩 조건문
+- 논리 연산자와 조건문
+- switch 조건문
+- 삼항 연산자
+- 조금 더 나아가기
+- 반복문
+- 배열
+- while 반복문
+- for 반복문
+- for in 반복문과 for of 반복문
+
+### 여러 줄 요약
+
+#### 중첩 조건문
+- 조건문 안에 조건문을 중첩해 사용하는 것
+
+#### 논리 연산자와 조건문
+>4.0과 4.5사이라면?
+>4.0 <= score && score <= 4.5
+
+#### switch 조건문
+
+#### 삼항 연산자
+> <불 표현식> ? <참> : <거짓>
+- undefined인 상태라면 초기화
+    >test = test ? test : "초기화";
+
+#### 조금 더 나아가기
+```
+const repl = require('repl');
+
+repl.start({
+    prompt: "<입력 때 앞에 출력할 문자열> ",
+    eval: (command, context, filename, callback) => {
+        //입력을 받았을 때 처리를 수행
+
+        //처리 완료
+
+        callback;
+    }
+});
+```
+
+#### 반복문
+
+#### 배열
+let 이름 = [자료, 자료, 자료, 자료]
+
+#### while 반복문
+while(<불 표현식>){
+    //불 표현식이 참인 동안 실행할 문장
+}
+- 반복의 횟수가 정해지지 않을 때
+
+#### for 반복문
+for(let i = 0; i < <반복 횟수>; i++){
+
+}
+
+#### for in 반복문과 for of 반복문
+for(let 인덱스 in 배열){
+
+}
+
+for(let 요소 of 배열){
+
+}
+```
+let array = ["사과", "배"];
+
+for(let i in array){
+    console.log(`${i}번째 요소: ${array[i]}`);
+}
+for(let item of array){
+    console.log(item);
+}
+```
+
 ## [03월 23일]
 ### 오늘 배운 내용 요약
 - 문자열

@@ -1,4 +1,92 @@
 # 정서연 [202030428]
+## [04월 06일]
+### 오늘 배운 내용 요약
+- 중첩 반복문 (별 출력)
+- break 키워드
+- continue 키워드
+- push, pop, shift, concat, reverse, sort, slice, splice, join
+- 스코프
+- 호이스팅
+- var 키워드
+
+### 여러 줄 요약
+` : 문자열과 변수를 같이 출력하고 싶을 때
+
+#### 중첩 반복문
+별 피라미드
+```
+let output = "";
+
+for(let i = 0; i < 10; i++){
+    for(let j = 0; j < i+1; j++){
+        output += "*";
+    }
+    output += "\n";
+}
+console.log(output);
+```
+```
+let output = "";
+
+for(let i = 0; i < 10; i++){
+    for(let j = 0; j < i+1; j++){
+        output += "*";
+    }
+    output += "\n";
+}
+console.log(output);
+```
+그 외 4-8 참고
+
+(html에서 link - ``` <script src=""></script> ```)
+
+#### break 키워드
+- switch 조건문이나 반복문을 벗어날 때 사용
+
+#### continue 키워드
+- 반복문 내부에서 현재 반복을 멈추고 다음 반복을 진행하게 함
+
+#### push
+- 배열의 끝에 원하는 값을 추가해주는 함수
+
+#### pop
+- 배열의 마지막 주소에 있는 값을 제거해주는 함수
+
+#### shift
+- 배열의 첫번째 주소에 있는 값을 제거한 후 변환해주는 함수
+
+push와 pop은 stack
+push와 shift는 queue
+
+#### concat
+- 두 개의 배열을 합쳐주는 함수
+
+#### reverse
+- 배열을 역순으로 재배치
+
+#### sort
+- 배열을 정렬
+
+#### slice
+- 원하는 만큼의 데이터를 뽑아 다른 곳에 사용할 수 있게 저장
+- array.slice([시작 인덱스], [마지막 인덱스])
+범위의 마지막 인덱스는 포함 X
+
+#### splice
+- 잘라냄
+- array.splice([begin index], [delete Count], [add Item])
+
+#### join
+- 배열값들 사이에 원하는 문자를 삽입하여 반환
+
+#### 스코프
+- 변수를 사용할 수 있는 범위
+- 스코프 == 블록
+
+#### var 키워드
+- let 키워드
+- 익스플로러
+
 ## [03월 30일]
 ### 오늘 배운 내용 요약
 - 중첩 조건문

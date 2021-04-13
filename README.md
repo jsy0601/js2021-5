@@ -1,4 +1,101 @@
 # 정서연 [202030428]
+## [04월 13일]
+### 오늘 배운 내용 요약
+- 익명함수
+- 선언적 함수
+- 화살표 함수
+- 함수의 기본 형태
+- 함수의 기본 활용 형태
+- 함수 매개 변수 초기화
+- 콜백 함수
+- 표준 내장 함수
+
+### 여러 줄 요약
+#### 익명함수
+- 이름을 붙이지 않고 함수를 생성
+> let <변수 이름> = function () {};
+
+#### 선언적 함수
+- 이름을 붙여 함수 생성
+> function <함수 이름> () {}
+
+#### 화살표 함수[ECMAScript6]
+- 하나의 표현식을 리턴하는 함수를 만들 때는 중괄호 생략가능
+> () => {}
+
+```javascript
+let foo = () => {
+    console.log("첫 번째 줄");
+    console.log("두 번째 줄");
+};
+
+foo();
+console.log(foo);
+```
+#### 함수의 기본 형태
+> function <함수 이름>(<매개 변수>) {
+    <함수 코드>
+    return <리턴 값>
+}
+```javascript
+function power(x) {
+    return x * x;
+}
+
+console.log(power(10));
+```
+
+#### 함수의 기본 활용 형태
+>function (<매개 변수>, <매개 변수>){
+>    let output = <초깃값>;
+>    return output;
+> }
+```javascript
+function foo(x) {
+    let bar = x * x;
+    return bar;
+}
+
+let foobar = foo(10);
+console.log(foobar);
+```
+
+#### 함수 매개 변수 초기화
+```javascript
+function print(name, count) {
+    if(!count){
+        count = 1;
+    }
+    console.log(`${name}이 ${count}개 있습니다.`)
+}
+print("사과", 10);
+print("사과");
+```
+
+#### 콜백 함수
+- 함수의 매개 변수로 전달되는 함수
+```javascript
+function callTenTimes(callback) {
+    for(let i = 0; i < 10; i++){
+        callback();
+    }
+}
+callTenTimes(function() {
+    console.log("함수 호출");
+});
+```
+#### 숫자 변환 함수
+- 뒤에 숫자로 변환할 수 없는 문자열이 있어도 문자열을 숫자로 변환할 수 있음
+- 실수형을 정수형으로는 변환 X
+> parseInt(), parseFloat()
+- 진법 변환 가능
+- 숫자 생성 방법과 진수
+
+#### 타이머 함수
+> setTimeout(함수, 시간) : 특정 시간 후에 함수를 실행
+> setInterval(함수, 시간) : 특정 시간마다 함수를 실행(종료하고 싶을 때 Ctrl + C)
+>clearInterval(아이디) : 특정 시간마다 실행하던 함수 호출을 정지
+
 ## [04월 06일]
 ### 오늘 배운 내용 요약
 - 중첩 반복문 (별 출력)

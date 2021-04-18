@@ -30,7 +30,7 @@ for(let i = 0; i < 10; i++){
     for(let j = 0; j < 10-i; j++){
         output += ' ';
     }
-    for(let j = 0; j < i + 1; j++){
+    for(let j = 0; j < i+1; j++){
         output += '*';
     }
     for(let j = 1; j < i+1; j++){
@@ -50,5 +50,19 @@ for(let i = 0; i < 10; i++){
     }
     output += '\n';
 }
-console.log(output);
+
+
+
 // 원 만들기
+for (i = 0; i <= 10 * 2; i++) {
+    for (j = 0; j <= 10 * 2; j++) {
+        let d =(i - 10) * (i - 10) + (j - 10) * (j - 10);
+        if (d <= 10) {
+            output += "*";
+        } else {
+            output += " ";
+        }
+    }
+    output += "\n";
+}
+console.log(output);

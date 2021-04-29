@@ -1,4 +1,114 @@
 # 정서연 [202030428]
+## [04월 27일]
+### 오늘 배운 내용 요약
+- 객체
+### 여러 줄 요약
+#### clearInterval(아이디)
+- 특정 시간마다 실행하던 함수 호출 정지
+```javascript
+let foo = setInteerval(() => {console.log("인터벌 1초 경과")},1000)
+
+setTimeout(() => {
+    clearInterval(foo);
+}, 3000)
+```
+
+#### 익명 함수와 선언적 함수의 생성 순서
+- 변수는 마지막에 들어간 게 보존된다. -> 함수도 마찬가지
+But, 선언적 함수는 코드를 실행하기 전에 생성됨
+- let 키워드를 사용하면 선언적 함수와 동일한 이름의 변수를 생성할 수 없음
+
+#### 익명 함수와 화살표 함수의 차이
+- 익명함수 내부에서 this는 자바스크립트 최상위 객체 또는 외부에서 강제로 연결한 객체를 나타내고 화살표 함수 내부에서 this는 자기 자신과 관련된 것만을 나타냄
+```javascript
+let name = "dong"
+foo = () => {
+    let name = "synn";
+    console.log(this.name);
+};
+// this는 synn
+function () {
+    console.log("this.name");
+};
+// this는 dong
+foo();
+```
+### 객체
+#### 객체 기본
+- 배열과 거의 같음
+```javascript
+//객체 선언
+let product = {
+    제품명: '망고',
+    유형: '당절임',
+    원산지: '필리핀',
+    price: 2000
+    //JSON
+};
+
+console.log(product.price);//price만 출력
+
+for (let key in product) {
+    console.log(`${product}: ${foo[product]}`);
+}
+```
+
+#### 속성과 메소드
+- 요소: 배열 내부에 있는 값 하나하나
+- 속성: 객체 내부에 있는 값 하나하나
+- 객체의 다양한 자료형
+```javascript
+let object = {
+    name = '바나나',
+    price: 2000,
+    print: function () {
+        console.log(`${this.name}의 가격은 ${this.price}원입니다.`)
+        //print() 메소드
+    }
+};
+```
+- 자신이 가지고 있는 속성이라는 것을 표시할 때 this 키워드 사용
+- JSON안에서 화살표 함수 사용 불가('undefined'가 나옴)
+- this키워드 생략 불가
+
+#### 생성자 함수와 프로토타입
+- 배열과 객체를 사용하면 여러 개의 데이터를 쉽게 다룰 수 있음
+- 객체 지향 프로그래밍
+```javascript
+let products = {
+    {name: '바나나', price: 1200},
+    {name: '사과', price: 2000}
+};
+```
+#### 생성자 함수
+- 객체를 만드는 함수
+- 대문자로 시작하는 이름 사용
+```javascript
+function Product(name, price){
+    this.name = name;
+    this.price = price;
+}
+// 객체를 생성
+let product = new Product("바나나", 1200);
+console.log(product);
+```
+#### 프로토타입
+- 모든 함수가 가지고 있는 속성으로 해당 함수를 생성자 함수로 사용했을 때만 의미가 있음
+```javascript
+function Product(name, price){
+    this.name = name;
+    this.price = price;
+}
+// 프로토타입에 메소드를 선언
+Product.prototype.print = function () {
+    console.log(`${this.name}의 가격은 ${this.price}원입니다.`)
+}
+// 객체를 생성
+let product = new Product("바나나", 1200);
+console.log(product);
+product.print();
+```
+
 ## [04월 13일]
 ### 오늘 배운 내용 요약
 - 익명함수

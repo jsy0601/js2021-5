@@ -97,6 +97,14 @@ let foo = "abcdefg";
 foo = foo.toUpperCase();
 console.log(foo);
 ```
+- 메소드 활용
+```javascript
+let foo = "좋은 아침입니다.";
+
+if(foo.indexOf('아침') >= 0){
+    console.log("좋은 아침이에요...!");
+}
+```
 ## [04월 27일]
 ### 오늘 배운 내용 요약
 - 객체

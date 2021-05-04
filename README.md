@@ -1,4 +1,102 @@
 # 정서연 [202030428]
+## [05월 04일]
+### 오늘 배운 내용 요약
+- 기본 자료형과 객체 자료형의 차이
+- number 객체
+- string 객체
+### 여러 줄 요약
+#### 생성자 함수와 프로토타입
+- 배열과 객체를 사용하면 여러 개의 데이터를 쉽게 다룰 수 있음
+- 객체 지향 프로그래밍
+```javascript
+let products = {
+    {name: '바나나', price: 1200},
+    {name: '사과', price: 2000}
+};
+```
+#### 생성자 함수
+- 객체를 만드는 함수
+- 대문자로 시작하는 이름 사용
+```javascript
+function Product(name, price){
+    this.name = name;
+    this.price = price;
+}
+// 객체를 생성
+let product = new Product("바나나", 1200);
+console.log(product);
+```
+#### 프로토타입
+- 모든 함수가 가지고 있는 속성으로 해당 함수를 생성자 함수로 사용했을 때만 의미가 있음
+```javascript
+function Product(name, price){
+    this.name = name;
+    this.price = price;
+}
+// 프로토타입에 메소드를 선언
+Product.prototype.print = function () {
+    console.log(`${this.name}의 가격은 ${this.price}원입니다.`)
+}
+// 객체를 생성
+let product = new Product("바나나", 1200);
+console.log(product);
+product.print();
+```
+#### null의 값과 자료형
+- null의 자료형은 object
+- 0 nan undefined " " -> false 실제로 값이 들어감
+- 아예 값이 없는 상태를 구분할 때 null을 사용
+### 표준 내장 객체
+#### 기본 자료형과 객체 자료형의 차이
+- 기본 자료형: 숫자, 문자열, 불
+```javascript
+let foo = false;
+let bar = 123;
+
+console.log(typeof foo); //boolean
+console.log(typeof bar); //number
+```
+- 객체 숫자, 문자열, 불
+```javascript
+let number = new Number(273);
+let string = new String("안녕");
+
+console.log(typeof number); //object
+console.log(typeof string); //object
+```
+- 차이점: 기본 자료형은 객체가 아니므로 속성과 메소드를 추가할 수 없음
+```javascript
+let foo = 273;
+//메소드 추가
+//프로토 타입에 메소드 추가해야 오류 안 남
+Number.prototype.method = function () {
+    return "hello"
+}
+console.log(foo.method());
+```
+#### Number 객체
+- 자바스크립트에서 숫자를 표현할 때 사용
+> toExponential(): 숫자를 지수 표시로 나타낸 문자열을 리턴
+> toFixed(): 숫자를 고정소수점 표시로 나타낸 문자열을 리턴
+> toPrecision(): 숫자를 길이에 따라 지수 표시 또는 고정소수점 표시로 나타낸 문자열을 리턴
+#### 생성자 함수의 속성
+- 생성자 함수에 속성과 메소드 추가
+```javascript
+function Constructor() { }
+Constructor.foo = 273;
+Constructor.bar = function () {};
+
+console.log(Constructor.foo);
+console.log(Constructor.bar);
+```
+> MAX_VALUE, MIN_VALUE, NaN, POSITIVE_INFINITY, NEGATIVE_INFINITY
+#### String 객체 
+```javascript
+let foo = "abcdefg";
+//자기 자신을 변경한 후 리턴
+foo = foo.toUpperCase();
+console.log(foo);
+```
 ## [04월 27일]
 ### 오늘 배운 내용 요약
 - 객체

@@ -11,6 +11,6 @@ repl.start({
             console.log("숫자입니다.");
         }
 
-        callback;
+        callback();
     }
 })

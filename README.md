@@ -1,4 +1,112 @@
 # 정서연 [202030428]
+## [05월 11일]
+### 오늘 배운 내용 요약
+
+### 여러 줄 요약
+#### Date 객체
+- new Date()
+- new Date(유닉스 타임)
+- new Date(시간 문자열)
+- new Date(<년>,<월-1>,<일>,<시간>,<분>,<초>,<밀리초>)
+#### 메소드 활용
+- getㅇㅇ() 형태 메소드, setㅇㅇ() 형태 메소드: FullYear, Month, Day, Hours, Minutes, Seconds 등 사용
+```javascript
+// 시간 더하기
+let date = new Date();
+console.log(date);
+
+date.setFullYear(date.getFullYear() + 1);
+date.setMonth(date.getMonth() + 11);
+date.setDate(date.getDate() + 3);
+
+console.log(date);
+```
+#### Array 객체
+- concat()
+- join()
+- pop()
+- push()
+- reverse()
+- slice()
+- sort()
+- splice()
+``` javascript
+let foo = [
+    {
+        name: '고구마',
+        price: 1000
+    }, 
+    {
+        name: '감자',
+        price: 500
+    }, 
+    {
+        name: '바나나',
+        price: 1500
+    }, 
+];
+let popped = foo.pop();
+console.log(popped);
+console.log(foo);
+
+foo.push(popped);
+foo.push(
+    {
+        name: "사과",
+        price: 2000
+    },
+    {
+        name: "수박",
+        price: 3000
+    }
+);
+console.log(foo);
+```
+#### ECMAScript5에서 추가된 메소드
+- forEach(): 배열의 요소를 하나씩 뽑아 반복
+- map(): 콜백 함수에서 리턴하는 것을 기반으로 새로운 배열을 만듦
+- filter(): 콜백 함수에서 true를 리턴하는 것으로만 새로운 배열을 만들어 리턴
+```javascript
+let foo = [55, 65, 400, 150, 24];
+
+foo.forEach((item, index) => {
+    console.log(`${index} - ${item}`);
+});
+
+let bar = foo.map((item, index) => {
+    return item + 10;
+});
+console.log(bar);
+
+let foobar = foo.filter((item,index) => {
+    return item % 2 == 0;
+});
+console.log(foobar);
+```
+#### underscroe.js 라이브러리
+- 자주 사용하는 기능 정리
+#### JSON 객체
+- JavaScript Object Notation: 자바스크립트 객체를 사용한 데이터 표현 방법
+- 문자열을 큰따옴표로 만듬
+- 모든 키는 큰따옴표로 감싸야 함
+- 숫자, 문자열, 불 자료형만 사용할 수 있음
+- JSON.stringify(<객체>,<변환 함수>,<공백 개수>): 자바스크립트 객체를 문자로 만든다.
+- JSON.parse(<문자열>): 문자열을 자바스크립트 객체로 파싱한다.
+#### 예외 처리
+- 예외 상황 확인: undefined 자료형을 일반적인 객체 또는 함수처럼 다루면 TypeError 예외가 발생
+```javascript
+function callThreeTimes(callback) {
+    for(let i = 0; i < 3; i++){
+        callback();
+    }
+}
+callThreeTimes(function () {console.log('안녕하세요');});
+callThreeTimes();
+```
+- 기본 예외 처리: 사전에 해당 데이터가 undefined인지 조건문으로 확인
+#### 고급 예외 처리 
+- try catch finally 구문
+
 ## [05월 04일]
 ### 오늘 배운 내용 요약
 - 기본 자료형과 객체 자료형의 차이

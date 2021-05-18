@@ -1,4 +1,149 @@
 # 정서연 [202030428]
+## [05월 18일]
+### 오늘 배운 내용 요약
+Node.js 기본
+### 여러 줄 요약
+#### 전역 변수
+- _ _filename: 현재 실행 중인 코드의 파일 경로를 나타냄
+- _ _dirname: 현재 실행 중인 코드의 폴더 경로를 나타냄
+#### process 객체의 속성과 이벤트
+- process 객체의 속성
+> env: 컴퓨터 환경 정보
+> version: Node.js 버전
+> versions: Node.js와 종속된 프로그램 버전
+> arch: 프로세서의 아키텍처
+> platform: 플랫폼
+- process 객체의 메소드
+> exit([exitCode = 0]): 프로그램 종료
+> memoryUsage(): 메모리 사용 정보 객체를 리턴
+> uptime(): 현재 프로그램이 실행된 시간을 리턴
+#### process 객체와 이벤트 개요
+- Node.js의 이벤트 연결 메소드
+> on(<이벤트 이름>, <이벤트 핸들러>): 이벤트 연결
+- process 객체의 이벤트
+> exit: 프로세스가 종료될 때
+> uncaughtException: 예외가 일어날 때
+
+- Node.js가 제공하는 객체의 이벤트: http://nodejs.org/en/docs/
+- process 객체: http://nodejs.org/dist/latest-v6.x/docs/api/process.html
+```javascript
+process.on('exit', (code) => {
+    console.log('프로세스 종료');
+    console.log(`exit 이벤트 매개 변수: ${code}`);
+});
+process.on('uncaughtException', (error) => {
+    console.log('예외 발생');
+    console.log(`uncaughtException 이벤트 매개 변수: ${error}`);
+});
+error.error.error();
+// 예외 발생
+//uncaughtException 이벤트 매개 변수: ReferenceError: error is not defined
+//프로세스 종료
+//exit 이벤트 매개 변수: 0
+```
+#### OS 모듈
+```javascript
+const foo = require('os');
+
+console.log(foo.hostname());
+console.log(foo.totalmem());
+```
+#### url 모듈
+```javascript
+const foo = require('url');
+
+console.log(foo.parse('http://naver.com'));
+```
+#### File System 모듈
+- 동기적으로 파일 읽어 들이기
+```javascript
+const foo = require('fs');
+
+// 파일을 읽어 들이고 출력
+const file = foo.readFileSync('textfile.txt');
+console.log(file);
+console.log(file.toString());
+```
+- 비동기적으로 파일 읽어 들이기
+```javascript
+const foo = require('fs');
+
+// 파일을 읽어 들임
+fs.readFile('textfile.txt', (error, file) => {
+    //출력
+    console.log(file);
+    console.log(file.toString());
+});
+```
+#### 비동기 처리의 장점
+- 웹 서버를 C++로 만들면 무척 빠르지만, 개발과 유지 보수는 어려움
+- 전 세계 웹 서비스 기업(페이스북, 트위터)도 C++로 개발하지 않고 PHP, 자바, 루비, 파이썬, Node.js 등으로 개발
+- 프로그래밍 언어 자체는 느리지만 큰 의미가 없다고 판단해 개발 속도와 유지 보수성이 좋은 프로그래밍 언어를 사용
+- 자바스크립트는 C++, 자바보다 느리지만 Node.js를 사용하면 손쉽게 비동기 처리를 구현하여 빠른 처리가 가능
+(sync는 동기식 p.244 9-12 비동기적-> 동기적으로 수정)
+#### 파일 쓰기
+- fs.writeFileSync(<파일 이름>,<문자열>): 동기적으로 파일 쓰기
+- fs.writeFile(<파일 이름>,<문자열>,<콜백 함수>): 비동기적으로 파일 쓰기
+#### 파일 처리와 예외 처리
+- 동기 코드 예외 처리
+```javascript
+const foo = require('fs');
+
+try{
+    const.file = foo.readFileSync('textfile.txt');
+    console.log(file);
+    console.log(file.toString());
+} catch(exception) {
+    console.log('파일 읽어 들이는데 문제 발생');
+    console.log(exception);
+}
+```
+- 비동기 코드 예외 처리
+```javascript
+const foo = require('fs');
+
+foo.readFile('textfile.txt', (error, file) => {
+    if(error) {
+        console.log('파일 읽어 들이는데 문제 발생');
+        console.log(error);
+    } else {
+        console.log(file);
+    console.log(file.toString());
+    }
+});
+```
+#### 노드 패키지 매니저
+(.gitignore.io에서 gitignore파일을 생성해준다.)
+##### .gitignore
+> /node_modules
+> package*.json
+#### request 모듈
+- 특정 페이지 소스 코드를 가져와 GitHub 페이지에서 문서를 확인할 수 있음(단순한 html 문자열)
+- 설치
+> npm install request
+```javascript
+const request = require('request');
+
+request("https://naver.com", (error, response, body) => {
+    console.log(body);
+})
+```
+#### cheerio 모듈
+- 단순한 데이터 정보를 가져옴(파싱)
+- 설치
+> npm install cheerio
+```javascript
+const request = require('request');
+const cheerio = require('cheerio');
+
+const url = "https://naver.com";
+
+request(url, (error, response, body) => {
+    const $ = cheerio.load(body);
+    console.log($('strong.new').text());
+});
+```
+
 ## [05월 11일]
 ### 오늘 배운 내용 요약
 

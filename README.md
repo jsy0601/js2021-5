@@ -1,4 +1,207 @@
 # 정서연 [202030428]
+## [05월 25일]
+### 오늘 배운 내용 요약
+express 모듈
+### 여러 줄 요약
+#### 요청과 응답
+- 요청 메시지: 클라이언트가 서버로 보내는 편지
+- 응답 메시지: 서버가 클라이언트로 보내는 편지
+#### express 모듈을 사용한 서버 생성과 실행
+- express 모듈의 기본 메소드
+> express() : 서버 애플리케이션 객체를 생성
+> app.use() : 요청이 왔을 때 실행할 함수를 지정
+> app.listen() : 서버를 실행
+```javascript
+// 모듈 추출
+const { response } = require('express');
+const express = require('express');
+// 서버 생성
+const app = express();
+// request 이벤트 리스너 설정
+app.use((request, response) => {
+    response.send('<h1>Hello express</h1>');
+});
+// 서버 실행
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### 페이지 라우팅
+- 클라이언트 요청에 적절한 페이지를 제공하는 기술
+- express 모듈의 페이지 라우팅 메소드
+> get(path, callback)
+> post(path, callback)
+> put(path, callback)
+> delete(path, callback)
+> all(path, callback)
+- 페이지 라우팅을 할 때 토큰을 활용함
+- ':<토근 이름>' 형태로 설정
+
+```javascript
+// 모듈 추출
+const express = require('express');
+// 서버 생성
+const app = express();
+// request 이벤트 리스너 설정
+app.get('/page/:id', (request, response) => {
+    // 토큰
+    const id = request.params.id;
+
+    // 응답
+    response.send(`<h1>${id} Page </h1>`);
+});
+// 서버 실행
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### 요청과 응답
+> send() : 데이터 본문 제공
+> status() : 상태 코드 제공
+> set() : 헤더 설정
+```javascript
+// 모듈 추출
+const express = require('express');
+// 서버 생성
+const app = express();
+// request 이벤트 리스너 설정
+app.get('*', (request, response) => {
+    response.status(404);
+    response.set('methodA', 'ABCDE');
+    response.set({
+        'methodB1': 'FGHIJ',
+        'methodB2': 'KLMNO'
+    });
+    response.send('내 마음대로 본문 입력');
+});
+// 서버 실행
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### Content-Type
+```javascript
+const { response } = require('express');
+const express = require('express');
+const fs = require('fs');
+
+const app = express();
+app.get('/image', (request, response) => {
+    fs.readFile('image.png', (error, data) => {
+        response.type('image/png');
+        response.send(data);
+    });
+});
+
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### HTTP 상태 코드: 404 Not Found
+- 서버가 클라이언트에 해당 경로는 이러한 상태라고 알려주는 용도
+- 상태 코드를 지정: status() 메소드 사용
+```javascript
+const express = require('express');
+const app = express();
+app.get('*', (request, response) => {
+    response.status(404);
+    response.send('해당 경로에 아무것도 없습니다.');
+});
+
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### 리다이렉트: 3XX, 특수한 상태 코드
+- 웹 브라우저가 리다이렉트를 확인하면 화면을 출력하지 않고, 응답 헤더에 있는 Location 속성을 확인해서 해당 위치로 이동
+```javascript
+const express = require('express');
+const app = express();
+app.get('*', (request, response) => {
+    response.redirect('http://hanbit.co.kr');
+});
+
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### request 객체
+- 요청 매개 변수 추출
+```javascript
+const express = require('express');
+const app = express();
+app.get('*', (request, response) => {
+    console.log(request.query);
+    response.send(request.query);
+});
+
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### 미들웨어
+- 정적 파일 제공
+```javascript
+const express = require('express');
+const app = express();
+app.use(express.static('public'));
+app.get('*', (request, response) => {
+    response.status(404);
+    response.send('해당 경로에 아무것도 없습니다.');
+});
+
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+- morgan 미들웨어
+```javascript
+const express = require('express');
+const morgan = require('morgan');
+
+const app = express();
+app.use(express.static('public'));
+app.use(morgan('combined'));
+
+app.get('*', (request, response) => {
+    response.send('명령 프롬프트를 확인해주세요.');
+});
+
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
+#### body-parser 미들웨어
+- 요청 본문을 분석
+```javascript
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(express.static('public'));
+app.use(morgan('combined'));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.get('/', (request, response) => {
+    let output = '';
+    output += '<form method="post">';
+    output += ' <input type="text" name="a" />';
+    output += ' <input type="text" name="b" />';
+    output += '<input type="submit" />';
+    output += '</form>';
+
+    response.send(output);
+});
+
+app.post('/', (request,response) => {
+    response.send(request.body);
+})
+
+app.listen(52273, () => {
+    console.log('Server running at http://127.0.0.1:52273');
+});
+```
 ## [05월 18일]
 ### 오늘 배운 내용 요약
 Node.js 기본

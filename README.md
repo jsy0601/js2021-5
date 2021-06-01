@@ -1,4 +1,138 @@
 # 정서연 [202030428]
+## [06월 01일]
+### 오늘 배운 내용 요약
+- 웹 브라우저의 자바스크립트
+- jQuery
+### 여러 줄 요약
+#### ECMAScript6에서 추가된 기능이라 구 버전에서는 사용할 수 없는 코드
+#### 1. let 키워드와 const키워드
+- 구 버전의 웹 브라우저에서는 let 키워드와 const 키워드를 사용할 수 없음
+#### 2. 템플릿 문자열
+- 문자열 연결 연산자를 사용해야 함
+#### 3. 화살표 함수
+- 함수를 만들 때는 반드시 function 키워드 사용
+#### 4. for of 반복문
+- for in 반복문을 사용해 대체
+#### 5. 사용할 수 없는 메소드를 사용한 코드
+- 배열에 관련된 처리를 할 때는 대부분 반복문을 사용
+
+#### 브라우저 객체 모델
+- 웹 브라우저와 관련된 객체
+#### window 객체
+- 웹 페이지 자체를 나타냄
+- 새로운 화면을 열거나 웹 브라우저의 크기를 변경하는 등의 일
+- 대표적으로 경고 출력을 하는 경고창과 입력을 하는 프롬프트 제공
+> alert: 경고창 출력
+> prompt: 프롬프트 출력
+#### screen 객체
+- 웹 브라우저에서 공통으로 활용할 수 있는 속성
+> width, height, availWidth, availHeight, colorDepth, pixelDepth
+#### location 객체와 history 객체
+- location 객체는 웹 브라우저의 주소창과 관련
+- 프로토콜의 종류, 호스트 이름, 문서 위치 등 정보가 있음
+- assign() 메소드와 다르게 replace() 메소드는 뒤로가기 버튼 사용 불가
+#### navigator 객체
+- 웹 페이지를 실행하는 웹 브라우저 정보가 들어 있음
+> appCodeName, appName, appVersion, platform, userAgent
+---
+#### jQuery 객체
+- $().메소드이름()
+- $(document).ready(): 문서 객체의 생성 완료 시점을 잡는 이벤트 연결
+#### 문서 객체 선택
+- CSS 선택자를 사용해 문서 객체 선택
+- 객체 탐색 메소드
+> parent(): 부모 태그 선택
+> find(): 후손 태그 찾기
+#### 문서 객체 개별 조작
+- $()함수 사용하면 여러 개의 문서 객체 선택
+> length: 선택된 문서 객체의 수 
+> get: 선택한 문서 객체 중 하나를 선택
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules\jquery\dist\jquery.min.js"></script>
+    <script>
+        // 웹 페이지를 모두 불러오려면
+        $(document).ready(function () {
+            // h1태그를 모두 추출하고
+            var $headers = $('h1');
+            // h1 태그의 개수만큼 반복을 돌려서
+            for(var i = 0; i < $headers.length; i++) {
+                //특정 위치에서
+                if(i % 2 == 1){
+                    // i번째 요소를 추출해
+                    var domElement = $headers.get(i);
+                    //배경 생상 적용
+                    $(domElement).css('backgroundColor', 'red');
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+    <h1>HeaderA</h1>
+    <h1>HeaderB</h1>
+    <h1>HeaderC</h1>
+    <h1>HeaderD</h1>
+</body>
+</html>
+```
+- each(): 선택한 문서 객체에 반복을 적용
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="node_modules\jquery\dist\jquery.min.js"></script>
+    <script>
+        // 웹 페이지를 모두 불러오려면
+        $(document).ready(function () {
+            $('h1').each(function (index, element) {
+                if(index % 2 == 1){
+                    //배경 생상 적용
+                    $(this).css('backgroundColor', 'red');    
+                }// $('h1:odd').css('backgroundColor', 'red'); 홀수
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>HeaderA</h1>
+    <h1>HeaderB</h1>
+    <h1>HeaderC</h1>
+    <h1>HeaderD</h1>
+</body>
+</html>
+```
+#### 문서 객체 조작
+- 문자 조작 메소드
+> text(), html()
+#### 스타일 조작
+> css()
+#### 속성 조작
+> attr()
+#### 문서 객체 생성
+- 문서 객체 생성할 땐 $() 함수의 매개 변수에 HTML 형식의 문자열을 입력
+- $('<h1></h1>')
+- 문서 객체 추가 메소드
+> $(<A>).prependTo(<B>): A를 B 안쪽 앞에 추가
+> $(<A>).appendTo(<B>): A를 B 안쪽 뒤에 추가
+> $(<A>).insertBefore(<B>): A를 B 앞에 추가
+> $(<A>).insertAfter(<B>): A를 B 안쪽 앞에 추가
+
+#### 이벤트 
+- on(): 이벤트를 연결
+- off(): 이벤트를 제거
+> $(<선택자>).on(<이벤트 이름>, <콜백 함수>)
+
 ## [05월 25일]
 ### 오늘 배운 내용 요약
 express 모듈
